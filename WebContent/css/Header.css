@@ -1,0 +1,77 @@
+#Header {
+	width: 100%;
+	min-width: 1000px;
+	margin: 0 10px 0 auto;
+	float: left;
+	border-bottom: 1px #ddd solid;
+
+}
+
+a:link,
+a:visited,
+a:active,
+a:hover {
+	text-decoration: none;
+	color: #333;
+}
+
+#logo {
+	margin: 0 10px;
+	height: 30px;
+}
+
+.Header_inner {
+	height: 35px;
+}
+
+.Header_inner * {
+	list-style: none;
+}
+
+.Header_inner > * {
+	height: 30px;
+}
+
+.Header_inner div ul li {
+	float: left;
+	padding: 5px;
+	font-size: 12px;
+	color: #333;
+	white-space: normal;
+}
+
+.catego {
+	float: left;
+}
+
+.user {
+	float: right;
+}
+
+.catego, .user {
+	height: 40px;
+	margin: auto;
+}
+
+.user  * {
+	height: 40px;
+}
+
+.user input {
+	height: 30px;
+}
+
+#search_button {
+	padding: 0 5px;
+}
+
+#search_box > button {
+	height: 30px;
+	border: 1px solid black;
+	background: white;
+}
+
+#search_box > button:hover {
+	color: white;
+	background: black;
+}

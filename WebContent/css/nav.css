@@ -1,0 +1,22 @@
+#nav {
+	float: left;
+	height: 40px;
+}
+
+nav  a {
+	height: 40px;
+}
+
+#nav * {
+	font-size: 12px;
+}
+
+#nav ul {
+	text-align: center;
+}
+
+#nav li {
+	display: inline-block;
+	float: left;
+	margin: 5px;
+}

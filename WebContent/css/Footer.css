@@ -1,0 +1,40 @@
+/* Footer */
+.Footer {
+	clear: both;
+	width: 100%;
+	min-width: 1000px;
+	min-height: 100px;
+	background: #fafafa;
+}
+
+.Footer_inner {
+	width: 100%;
+	border-top: 1px #ddd solid;
+}
+
+.Footer_inner h3 {
+	font-size: 13px;
+}
+
+#owner {
+	font-size: 12px;
+}
+
+.Footer_inner p {
+	font-size: 11px;
+}
+
+.Footer_inner p:nth-child(1) > span:nth-child(1) {
+	font-size: 12px;
+}
+
+.Footer_box {
+	margin: 10px;
+	min-width: 380px;
+}
+
+.Footer_inner > ul > li{
+	list-style: none;
+	float: left;
+	width: 25%
+}
