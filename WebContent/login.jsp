@@ -39,7 +39,7 @@
 			</p>
 			<input type="submit" id="login" value="LOGIN"><br>
 		</form>
-		<a href="./SignUp.html"><button id="JoinUs">JOIN US</button></a>
+		<a href="./SignUp.jsp"><button id="JoinUs">JOIN US</button></a>
 	</div>
 </div>
 <!--/main-->

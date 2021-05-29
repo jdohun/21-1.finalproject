@@ -15,7 +15,7 @@
 	<div class="Header_inner">
 		<div class="catego">
 			<ul>
-				<li><a href="index.jsp"><img id="logo" src="images/_Aeoggeo9 .png" alt="쇼핑몰로고"></a></li>
+				<li><a href="Home.show"><img id="logo" src="images/_Aeoggeo9 .png" alt="쇼핑몰로고"></a></li>
 			</ul>
 		</div>
 		<nav id="nav">

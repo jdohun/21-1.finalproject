@@ -1,5 +1,7 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<%@ page import="com.dev.vo.ItemVO" %>
+<%@ page import="java.util.ArrayList" %>
 <!DOCTYPE html>
 <html>
 <head>
@@ -11,7 +13,9 @@
 	<link rel="stylesheet" href="css/main.css">
 	<title>쇼핑몰 메인</title>
 </head>
-
+<%
+	ArrayList<ItemVO> List = (ArrayList<ItemVO>)request.getAttribute("List");
+%>
 <body>
 <!--Wrapper-->
 <div id="Wrapper">
@@ -21,233 +25,44 @@
 <!--main-->
 <div id="Container">
 	<div class="contents">
-		<div class="itemList">
-			<ul>
-				<li>
-					<a href="outer.html">
-						<div class="itembox">
-							<img src="images/OUTER/아우터1.jpg" alt="" class="thumb">
-						</div>
-						<ul class="caption">
-							<li>
-								<p class="item_name">아우터1</p>
-							</li>
-							<li>
-								<p class="price">69,800</p>
-							</li>
-							<li>
-								<p class="size">S, M, L</p>
-							</li>
-						</ul>
-					</a>
-				</li>
-				<li>
-					<a href="outer.html">
-						<div class="itembox">
-							<img src="images/OUTER/아우터2.jpg" alt="" class="thumb">
-						</div>
-						<ul class="caption">
-							<li>
-								<p class="item_name">아우터2</p>
-							</li>
-							<li>
-								<p class="price">39,000</p>
-							</li>
-							<li>
-								<p class="size">XS, S, M, L, XL, 2XL</p>
-							</li>
-						</ul>
-					</a>
-				</li>
-				<li>
-					<a href="outer.html">
-						<div class="itembox">
-							<img src="images/OUTER/아우터3.jpg" alt="" class="thumb">
-						</div>							
-						<ul class="caption">
-							<li>
-								<p class="item_name">아우터3</p>
-							</li>
-							<li>
-								<p class="price">56,000</p>
-							</li>
-							<li>
-								<p class="size">M, L XL, 2XL</p>
-							</li>
-						</ul>
-					</a>
-				</li>
-				<li>
-					<a href="outer.html">
-						<div class="itembox">
-							<img src="images/OUTER/아우터4.jpg" alt="" class="thumb">
-						</div>
-						<ul class="caption">
-							<li>
-								<p class="item_name">아우터4</p>
-							</li>
-							<li>
-								<p class="price">49,000</p>
-							</li>
-							<li>
-								<p class="size">M, L</p>
-							</li>
-						</ul>
-					</a>
-				</li>
-			</ul>
+		<div class="titleArea">
+				<h3>MAIN</h3>
 		</div>
 		<div class="itemList">
 			<ul>
+				<%
+					if(!List.isEmpty()){
+						for(int i = 0; i < List.size(); ++i){
+							ItemVO item = List.get(i);
+				%>
 				<li>
-					<a href="top.html">
+					<a href="description.show?pNum=<%=item.getpNum() %>">
 						<div class="itembox">
-							<img src="images/TOP/탑1.jpg" alt="" class="thumb">
+							<img src=<%=item.getUrl()%> alt="상품사진" class="thumb">
 						</div>
 						<ul class="caption">
 							<li>
-								<p class="item_name">탑1</p>
+								<p class="item_name"><%=item.getName() %></p>
 							</li>
 							<li>
-								<p class="price">48,300</p>
+								<p class="price"><%=item.getPrice() %></p>
 							</li>
 							<li>
-								<p class="size">S, M, L, XL</p>
+								<p class="size"><%=item.getSize() %></p>
 							</li>
 						</ul>
 					</a>
 				</li>
-				<li>
-					<a href="top.html">
-						<div class="itembox">
-							<img src="images/TOP/탑2.jpg" alt="" class="thumb">
-						</div>
-						<ul class="caption">
-							<li>
-								<p class="item_name">탑2</p>
-							</li>
-							<li>
-								<p class="price">58,500</p>
-							</li>
-							<li>
-								<p class="size">M, L, XL</p>
-							</li>
-						</ul>
-					</a>
-				</li>
-				<li>
-					<a href="top.html">
-						<div class="itembox">
-							<img src="images/TOP/탑3.jpg" alt="" class="thumb">
-						</div>							
-						<ul class="caption">
-							<li>
-								<p class="item_name">탑3</p>
-							</li>
-							<li>
-								<p class="price">65,600</p>
-							</li>
-							<li>
-								<p class="size">S, M, L, XL</p>
-							</li>
-						</ul>
-					</a>
-				</li>
-				<li>
-					<a href="top.html">
-						<div class="itembox">
-							<img src="images/TOP/탑4.jpg" alt="" class="thumb">
-						</div>
-						<ul class="caption">
-							<li>
-								<p class="item_name">탑4</p>
-							</li>
-							<li>
-								<p class="price">32,000</p>
-							</li>
-							<li>
-								<p class="size">M, L</p>
-							</li>
-						</ul>
-					</a>
-				</li>
-			</ul>
-		</div>
-		<div class="itemList">
-			<ul>
-				<li>
-					<a href="pants.html">
-						<div class="itembox">
-							<img src="images/PANTS/팬츠1.jpg" alt="" class="thumb">
-						</div>
-						<ul class="caption">
-							<li>
-								<p class="item_name">팬츠1</p>
-							</li>
-							<li>
-								<p class="price">57,850</p>
-							</li>
-							<li>
-								<p class="size">44, 46, 48, 50</p>
-							</li>
-						</ul>
-					</a>
-				</li>
-				<li>
-					<a href="pants.html">
-						<div class="itembox">
-							<img src="images/PANTS/팬츠2.jpg" alt="" class="thumb">
-						</div>
-						<ul class="caption">
-							<li>
-								<p class="item_name">팬츠2</p>
-							</li>
-							<li>
-								<p class="price">62,300</p>
-							</li>
-							<li>
-								<p class="size">44, 46, 48, 50</p>
-							</li>
-						</ul>
-					</a>
-				</li>
-				<li>
-					<a href="pants.html">
-						<div class="itembox">
-							<img src="images/PANTS/팬츠3.jpg" alt="" class="thumb">
-						</div>							
-						<ul class="caption">
-							<li>
-								<p class="item_name">팬츠3</p>
-							</li>
-							<li>
-								<p class="price">59,000</p>
-							</li>
-							<li>
-								<p class="size">29, 30, 31, 32, 33, 34, 36</p>
-							</li>
-						</ul>
-					</a>
-				</li>
-				<li>
-					<a href="pants.html">
-						<div class="itembox">
-							<img src="images/PANTS/팬츠4.jpg" alt="" class="thumb">
-						</div>
-						<ul class="caption">
-							<li>
-								<p class="item_name">팬츠4</p>
-							</li>
-							<li>
-								<p class="price">29,800</p>
-							</li>
-							<li>
-								<p class="size">S, M, L</p>
-							</li>
-						</ul>
-					</a>
-				</li>
-			</ul>
+				<%
+						}
+					}
+					else{
+						String msg = (String)request.getAttribute("msg");
+					%>
+						<p>등록된 상품이 없습니다.</p>
+					<%	
+					}
+				%>
 		</div>
 	</div>
 </div>

@@ -8,6 +8,6 @@
 </head>
 <body>
 	<%	session.invalidate(); %>
-	<meta http-equiv="refresh" content="0; URL=index.jsp">
+	<meta http-equiv="refresh" content="0; URL=index.show">
 </body>
 </html>

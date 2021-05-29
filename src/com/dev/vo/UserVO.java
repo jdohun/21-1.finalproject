@@ -7,6 +7,7 @@ public class UserVO {
 	private String phone;
 	private String addr;
 	private String email;
+	private int money;
 	
 	public String getId() {
 		return id;
@@ -55,5 +56,13 @@ public class UserVO {
 	
 	public void setEmail(String email) {
 		this.email = email;
+	}
+
+	public int getMoney() {
+		return money;
+	}
+
+	public void setMoney(int money) {
+		this.money = money;
 	}
 }

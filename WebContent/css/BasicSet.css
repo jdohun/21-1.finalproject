@@ -39,3 +39,10 @@ input[type="number"]::-webkit-inner-spin-button {
 	float: left;
 	width: 100%;
 }
+.contents {
+	text-align: center;
+}
+
+.titleArea h3 {
+	font-size: 19px;
+}

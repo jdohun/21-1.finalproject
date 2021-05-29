@@ -21,9 +21,9 @@ public class LoginController implements Controller {
 		if(result = true) {
 			HttpSession session = req.getSession();
 			session.setAttribute("id", id);
-			path = "/Home.jsp";
+			path = "/Home.show";
 		} else {
-			path = "/login.jsp";
+			path = "/login.show";
 			String msg = "아이디 또는 비밀번호가 틀렸습니다.";
 			req.setAttribute("msg", msg);
 		}

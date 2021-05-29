@@ -4,7 +4,7 @@ import com.dev.dao.UserDAO;
 import com.dev.vo.UserVO;
 
 public class UserService {
-	UserDAO dao = UserDAO.getInstance();
+	private UserDAO dao = UserDAO.getInstance();
 	private static UserService userService = new UserService();
 	
 	private UserService(){};
