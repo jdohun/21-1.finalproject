@@ -9,7 +9,7 @@
 	<link rel="stylesheet" href="css/Footer.css">
 	<link rel="stylesheet" href="css/nav.css">
 	<link rel="stylesheet" href="css/SignUp.css">
-	<title>회원가입</title>
+	<title>어쩌구</title>
 </head>
 
 <body>

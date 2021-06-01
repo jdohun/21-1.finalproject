@@ -11,7 +11,7 @@
 	<link rel="stylesheet" href="css/nav.css">
 	<link rel="stylesheet" href="css/Footer.css">
 	<link rel="stylesheet" href="css/main.css">
-	<title>쇼핑몰 메인</title>
+	<title>어쩌구</title>
 </head>
 <%
 	ArrayList<ItemVO> List = (ArrayList<ItemVO>)request.getAttribute("List");
