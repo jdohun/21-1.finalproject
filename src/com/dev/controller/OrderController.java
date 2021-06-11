@@ -14,12 +14,13 @@ public class OrderController extends HttpServlet{
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		List = new HashMap<String, Controller>();
-		List.put("/search.order", new ItemSearchController());
-		List.put("", new OrderCartController());
+		List.put("/onList.order", new OrderOnListController());
+		List.put("/orderCompleted.order", new OrderCompletedController());
 	}
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		String path = req.getServletPath();
 		Controller subController = List.get(path);
 		subController.execute(req, resp);

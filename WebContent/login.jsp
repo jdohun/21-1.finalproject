@@ -11,7 +11,9 @@
 	<link rel="stylesheet" href="css/login.css">
 	<title>로그인</title>
 </head>
-
+<%
+	String msg = (String)request.getAttribute("msg");
+%>
 <body>
 <!--Wrapper-->
 <div id="Wrapper">
@@ -27,10 +29,15 @@
 		<form class="login" method="post" action="login.do">
 			<div>
 				<ul>
-					<li><input type="text" name="userId" id="userId" placeholder="아이디" autofocus></li>
-					<li><input type="password" name="userPassword" id="userPassword" placeholder="비밀번호"></li>
+					<li><input type="text" name="id" id="userId" placeholder="아이디" autofocus></li>
+					<li><input type="password" name="pwd" id="userPassword" placeholder="비밀번호"></li>
 				</ul>
 			</div>
+			<%
+				if(msg != null){
+			%>
+				<br><p style="color:red;"><%=msg %></p><br>
+			<% }%>
 			<p class="save">
 			<input type="checkbox" name="saveID" id="saveID">
 			<label for="saveID">아이디 저장</label><br>
@@ -39,7 +46,7 @@
 			</p>
 			<input type="submit" id="login" value="LOGIN"><br>
 		</form>
-		<a href="./SignUp.jsp"><button id="JoinUs">JOIN US</button></a>
+		<a href="SignUp.jsp"><button id="JoinUs">JOIN US</button></a>
 	</div>
 </div>
 <!--/main-->

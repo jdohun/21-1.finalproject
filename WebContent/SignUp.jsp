@@ -55,7 +55,7 @@
 					</tr>
 					<tr>
 						<th>이메일</th>
-						<td><input type="email" name="email"></td>
+						<td><input type="text" name="email1">@<input type="text" name="email2"></td>
 					</tr>
 				</tbody>
 			</table>

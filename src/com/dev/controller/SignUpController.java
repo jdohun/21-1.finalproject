@@ -20,7 +20,8 @@ public class SignUpController implements Controller {
 		String SignUpName = req.getParameter("SignUpName");
 		String SignUpAddr = req.getParameter("SignUpAddr");
 		String SignUpPhone = req.getParameter("SignUpPhone");
-		String email = req.getParameter("email");
+		String email1 = req.getParameter("email1");
+		String email2 = req.getParameter("email2");
 		
 		// user 정보 저장
 		UserVO user = new UserVO();
@@ -29,7 +30,8 @@ public class SignUpController implements Controller {
 		user.setName(SignUpName);
 		user.setAddr(SignUpAddr);
 		user.setPhone(SignUpPhone);
-		user.setEmail(email);
+		user.setEmail1(email1);
+		user.setEmail2(email2);
 		
 		UserService service = UserService.getInstance();
 		service.signUp(user);

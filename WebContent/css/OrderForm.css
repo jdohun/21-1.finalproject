@@ -39,6 +39,10 @@ table, th, td {
 	font-size: 12px;
 }
 
+.thumb {
+	height : 80px;
+	width : 80px;
+}
 
 #orderListArea {
 	width: 100%;
@@ -157,29 +161,27 @@ table, th, td {
 	padding: 24px 0;
 }
 
-.oFinal {
+#oFinal {
 	min-width: 900px;
 	margin-bottom: 50px;
 }
 
-.oFinal > div{
+#oFinal th{
+	width: 50%;
+	background: #f9f9f9;
+	padding: 12px 0;
+}
+
+#oFinal > table > tr, #oFinal > table > tr > th{
 	border: 1px solid #ddd;
 	padding: 10px;
 	color: #483D8B;
 }
 
-.oFinal > div:first-child {
+#oFinal > table> tr> th{
 	border-bottom: none;
 	font-weight: bold;
 	background: #f1f1f1;
-}
-
-.oFinal > div:last-child {
-	border-top: none;
-}
-
-.oFinal > div > p {
-	
 }
 
 

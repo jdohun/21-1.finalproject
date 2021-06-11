@@ -17,7 +17,11 @@ public class UserService {
 		dao.signUp(user);
 	}
 
-	public boolean login(String id, String pwd) {
+	public UserVO login(String id, String pwd) {
 		return dao.login(id, pwd);
+	}
+
+	public UserVO charge(UserVO user, String charge) {
+		return dao.charge(user, charge);
 	}
 }

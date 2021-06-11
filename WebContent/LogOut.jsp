@@ -5,9 +5,15 @@
 <head>
 <meta charset="UTF-8">
 <title>Insert title here</title>
+	<link rel="stylesheet" href="css/BasicSet.css">
+	<link rel="stylesheet" href="css/Header.css">
+	<link rel="stylesheet" href="css/nav.css">
+	<link rel="stylesheet" href="css/Footer.css">
 </head>
 <body>
-	<%	session.invalidate(); %>
-	<meta http-equiv="refresh" content="0; URL=index.show">
+	<%
+		session.invalidate();
+		response.sendRedirect("index.show");
+	%>
 </body>
 </html>

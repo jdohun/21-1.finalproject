@@ -1,23 +1,37 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
 <%@ page import="com.dev.vo.ItemVO" %>
+<%@ page import="java.text.DecimalFormat" %>
 <!DOCTYPE html>
 <html>
 <head>
 <%
+	String id = (String)request.getSession().getAttribute("id");
 	ItemVO item = (ItemVO)request.getAttribute("item");
-	String size = item.getSize();
-	String[] arraySize = size.split(", ");
+	String size = item.getsOptions();
+	String[] arraySize = size.split(",");
+	DecimalFormat commas = new DecimalFormat("###,###");
+	String sPrice = commas.format(item.getPrice());
 %>
 <meta charset="UTF-8">
 <title>어쩌구</title>
 </head>
-<link rel="stylesheet" href="css/Product.css">
+	<link rel="stylesheet" href="css/BasicSet.css">
+	<link rel="stylesheet" href="css/Header.css">
+	<link rel="stylesheet" href="css/nav.css">
+	<link rel="stylesheet" href="css/Footer.css">
+	<link rel="stylesheet" href="css/Product.css">
 <body>
 <!--Wrapper-->
 <div id="Wrapper">
 <!--header-->
+<%
+	if(id == null){
+%>
 <%@ include file="Header_guest.jsp" %>
+<% }else{%>
+<%@ include file="Header_user.jsp" %>	
+<%} %>
 <!--/header-->
 <!--main-->
 <div id="Container">
@@ -29,12 +43,12 @@
 			<div class="inforArea">
 				<div class="headingArea">
 					<h2><%=item.getName() %></h2>
-					<div class="size">[<%=item.getSize()%>]</div>
+					<div class="size">[<%=size%>]</div>
 				</div>
 				<table class="option">
 					<tr>
 						<th><span>판매가</span></th>
-						<td><span class="Price"><%=item.getPrice() %></span></td>
+						<td><span class="Price"><%=sPrice %></span></td>
 					</tr>
 					<tr>
 						<th><span>사이즈</span></th>
@@ -66,8 +80,8 @@
 					</span>
 				</div>
 				<div id="product_action">
-					<a href="" id="btnBuy"><button type="submit" onclick="javascript: form.action='search.order?job=buy';">BUY IT NOW</button></a>
-					<a href="" id="btnAdd"><button type="submit" onclick="javascript: form.action='search.order?job=cart';">ADD TO CART</button></a>
+					<a href="" id="btnBuy"><button type="submit" onclick="javascript: form.action='onList.order?job=buy';">BUY IT NOW</button></a>
+					<a href="" id="btnAdd"><button type="submit" onclick="javascript: form.action='onList.order?job=cart';">ADD TO CART</button></a>
 					<a href="" id="btnWish"><button type="submit" onclick="javascript: form.action='';">WISH LIST</button></a>
 				</div>
 				</form>
@@ -125,11 +139,10 @@
 		let newRow = $("#selected_option").append(
 			`<tr>
 				<td>
-					<p></p>
 				</td>
 				<td>
 					<span class="option_boxes">
-						<input type="text" value="1" class="product_count" >
+						<input type="text" value="1" class="product_count">
 						<button type="button" class="count_up, product_updown" onclick="increaseCount(this.previousElementSibling), checkSelectedExist()">↑</button>
 						<button type="button" class="count_down, product_updown" onclick="decreaseCount(this.previousElementSibling.previousElementSibling), checkSelectedExist()">↓</button>
 					</span>
@@ -138,7 +151,8 @@
 			</tr>`
 		);
 		//p 안에 값 넣기
-		selected_option.lastChild.children[0].children[0].innerHTML = name + `<br><span class="generatedOptions" id="generatedOption` + i++ + `">` + selected_value + `</span>`;
+		selected_option.lastChild.children[0].innerHTML = `<p>` + name + `<br><span class="generatedOptions" id="generatedOption` + i++ + `">` + selected_value + `</span></p>`;
+		selected_option.lastChild.children[1].innerHTML += `<input type="hidden" name="selected[]" value=`+ selected_value + `>`
 		// 개수 값이 들어있는 input에 name 속성 주기
 		selected_option.lastChild.children[1].children[0].children[0].setAttribute("name", selected_value+"Count");
 	};

@@ -1,15 +1,5 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<!DOCTYPE html>
-<html>
-<head>
-	<meta charset="UTF-8">
-	<title>Document</title>
-	<link rel="stylesheet" href="css/BasicSet.css">
-	<link rel="stylesheet" href="css/Footer.css">
-</head>
-<body>
-<!--footer-->
 <div class="Footer">
 	<div class="Footer_inner">
 		<ul>
@@ -33,6 +23,3 @@
 		</ul>
 	</div>
 </div>
-<!--/footer-->
-</body>
-</html>

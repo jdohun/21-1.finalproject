@@ -20,7 +20,7 @@
 <!--Wrapper-->
 <div id="Wrapper">
 <!--header-->
-<%@ include file="Header_user.jsp" %>
+<%@ include file="Header_user.jsp"; %>
 <!--/header-->
 <!--main-->
 <div id="Container">
@@ -33,7 +33,7 @@
 </div>
 <!--/main-->
 <!--footer-->
-<%@ include file="Footer.jsp" %>
+<%@ include file="Footer.jsp"; %>
 <!--/footer-->
 </div>
 <!--/Wrapper-->

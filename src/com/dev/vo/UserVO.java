@@ -6,7 +6,8 @@ public class UserVO {
 	private String name;
 	private String phone;
 	private String addr;
-	private String email;
+	private String email1;
+	private String email2;
 	private int money;
 	
 	public String getId() {
@@ -49,13 +50,21 @@ public class UserVO {
 	public void setAddr(String addr) {
 		this.addr = addr;
 	}
-	
-	public String getEmail() {
-		return email;
+
+	public String getEmail1() {
+		return email1;
 	}
-	
-	public void setEmail(String email) {
-		this.email = email;
+
+	public void setEmail1(String email1) {
+		this.email1 = email1;
+	}
+
+	public String getEmail2() {
+		return email2;
+	}
+
+	public void setEmail2(String email2) {
+		this.email2 = email2;
 	}
 
 	public int getMoney() {

@@ -15,8 +15,11 @@ public class ShowController extends HttpServlet {
 	@Override
 	public void init(ServletConfig config) throws ServletException {
 		list.put("/index.show", new ShowAllController());
-		list.put("/Home.show",  new ShowAllController());
 		list.put("/description.show",  new ShowDescriptionController());
+		list.put("/cart.show",  new ShowCartController());
+		list.put("/cartAllOrder.show",  new ShowCartAllOrderController());
+		list.put("/selectedOrder.show",  new ShowSelectedOrderController());
+		list.put("/orderCompleted.show",  new ShowOrderCompletedController());
 	}
 	
 	@Override

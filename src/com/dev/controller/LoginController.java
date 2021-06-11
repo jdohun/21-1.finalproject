@@ -8,26 +8,27 @@ import javax.servlet.http.HttpServletResponse;
 import javax.servlet.http.HttpSession;
 
 import com.dev.service.UserService;
+import com.dev.vo.UserVO;
 
 public class LoginController implements Controller {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String id = req.getParameter("id");
+		String id = (String)req.getParameter("id");
 		String pwd = req.getParameter("pwd");
-		
-		boolean result = UserService.getInstance().login(id, pwd);
+		UserVO user = UserService.getInstance().login(id, pwd);
 		
 		String path = null;
-		if(result = true) {
+		if(user.getId() != null) {
 			HttpSession session = req.getSession();
 			session.setAttribute("id", id);
-			path = "/Home.show";
+			session.setAttribute("user", user);
+			path = "index.show";
+			resp.sendRedirect(path);
 		} else {
-			path = "/login.show";
 			String msg = "아이디 또는 비밀번호가 틀렸습니다.";
 			req.setAttribute("msg", msg);
+			path = "/login.jsp";
+			HttpUtil.forward(req, resp, path);
 		}
-		
-		HttpUtil.forward(req, resp, path);
 	}
 }

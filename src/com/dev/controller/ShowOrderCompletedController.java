@@ -6,10 +6,10 @@ import javax.servlet.ServletException;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
-public class ItemSearchController implements Controller {
+public class ShowOrderCompletedController implements Controller {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		String selectedItem = req.getParameter("selectedItem");
-		
+		// TODO Auto-generated method stub
+
 	}
 }
