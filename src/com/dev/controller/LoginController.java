@@ -16,9 +16,9 @@ public class LoginController implements Controller {
 		String id = (String)req.getParameter("id");
 		String pwd = req.getParameter("pwd");
 		UserVO user = UserService.getInstance().login(id, pwd);
-		
+		System.out.println();
 		String path = null;
-		if(user.getId() != null) {
+		if(user != null) {
 			HttpSession session = req.getSession();
 			session.setAttribute("id", id);
 			session.setAttribute("user", user);

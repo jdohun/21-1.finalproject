@@ -8,10 +8,11 @@ import java.sql.SQLException;
 import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
-import java.util.Date;
 
 import com.dev.vo.CartVO;
 import com.dev.vo.ItemVO;
+import com.dev.vo.ODetailVO;
+import com.dev.vo.OSheetVO;
 import com.dev.vo.UserVO;
 
 public class ItemDAO {
@@ -222,28 +223,49 @@ public class ItemDAO {
 		return itemList;
 	}
 
-	public UserVO orderComplete(String date, String orderer, ArrayList<String> prod) {
+	public UserVO orderComplete(String orderer, ArrayList<String> prod, ODetailVO oDetail) {
 		ArrayList<ItemVO> itemList = new ArrayList<ItemVO>();
-		String oNumber = date;
+		ArrayList<ODetailVO> oDetList = new ArrayList<ODetailVO>();
 		int result = 0;
+		
 		Connection con = connect();
-		String sql  = "insert into oSheet(oNum, orderer, pNum, sOption, quantity) values(?,?,?,?,?)";
+		String sql  = "insert into oSheet(oNum, orderer, pNum, sOption, quantity, bill) values(?,?,?,?,?,?)";
 		PreparedStatement pstmt = null;
 		ItemVO item = null;
+		int finalBill = 0;
 		
 		try {
 			for(int i = 0; i < prod.size(); i+=3) {
+				SimpleDateFormat format = new SimpleDateFormat("yyMMddhhmmss");
+				Timestamp now = new Timestamp(System.currentTimeMillis());
+				String date = format.format(now);
+				String oNum = date + "-" ;
+				
+				for(int j = 0; j<5; ++j) {
+					double dValue = Math.random();
+					char cValue = (char)((dValue * 26) + 65);   // 대문자
+					oNum += cValue;
+				}
 				String pNum = prod.get(i);
 				String sOption = prod.get(i+1);
 				int quantity = Integer.parseInt(prod.get(i+2));
+				ArrayList<String> thisOrder = new ArrayList<String>();
+				thisOrder.add(pNum);
+				thisOrder.add(sOption);
+				thisOrder.add(prod.get(i+2));
+				int bill = checkBill(orderer, thisOrder);
 				
 				pstmt = con.prepareStatement(sql);
-				pstmt.setString(1, oNumber);
+				pstmt.setString(1, oNum);
 				pstmt.setString(2, orderer);
 				pstmt.setString(3, pNum);
 				pstmt.setString(4, sOption);
 				pstmt.setInt(5, quantity);
+				pstmt.setInt(6, bill);
 				result = pstmt.executeUpdate();
+				oDetail.setoNum(oNum);
+				oDetList.add(oDetail);
+				finalBill += bill;
 			}
 		} catch (SQLException e) {
 			System.out.println("orderComplete: " + e);
@@ -251,13 +273,12 @@ public class ItemDAO {
 			close(pstmt, con);
 		}
 		if(result == 1) {
-			int bill = checkBill(orderer, prod);
-			UserVO user = payBill(bill, orderer);
+			UserVO user = payBill(finalBill, orderer);
+			orderDetailComplete(oDetList);
 			deleteCart(orderer, prod);
 			return user;
 		}
-		
-		return null;
+		else return null;
 	}
 
 	public int checkBill(String orderer, ArrayList<String> prod) {
@@ -349,5 +370,164 @@ public class ItemDAO {
 		} finally {
 			close(pstmt, con);
 		}
+	}
+
+	public void orderDetailComplete(ArrayList<ODetailVO> oDetList) {
+		Connection con = connect();
+		String sql = "insert into oDetail values(?,?,?,?,?,?,?,?,?,?)";
+		PreparedStatement pstmt = null;
+		
+		try {
+			for(int i = 0; i < oDetList.size(); ++i) {
+				ODetailVO oDetail = oDetList.get(i);
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, oDetail.getoNum());
+				pstmt.setString(2, oDetail.getoName());
+				pstmt.setString(3, oDetail.getoAddr());
+				pstmt.setString(4, oDetail.getoPhone());
+				pstmt.setString(5, oDetail.getoEmail1());
+				pstmt.setString(6, oDetail.getoEmail2());
+				pstmt.setString(7, oDetail.getrName());
+				pstmt.setString(8, oDetail.getrAddr());
+				pstmt.setString(9, oDetail.getrPhone());
+				pstmt.setString(10, oDetail.getrText());
+				pstmt.executeUpdate();
+			}
+		} catch (SQLException e) {
+			System.out.println("orderDetailComplete: " + e);
+		} finally {
+			close(pstmt, con);
+		}
+	}
+
+	public ArrayList<OSheetVO> getOrdered(String orderer, int prodCount) {
+		ArrayList<OSheetVO> osList = new ArrayList<OSheetVO>();
+		OSheetVO osheet = null;
+		Connection con = connect();
+		String sql = "select * from oSheet where orderer = ? order by orderTime desc limit ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, orderer);
+			pstmt.setInt(2, prodCount);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				osheet = new OSheetVO();
+				osheet.setoNum(rs.getString("oNum"));
+				osheet.setpNum(rs.getString("pNum"));
+				osheet.setsOption(rs.getString("sOption"));
+				osheet.setQuantity(rs.getInt("quantity"));
+				osheet.setBill(rs.getInt("bill"));
+				osheet.setOrderTime(rs.getString("orderTime"));
+				osheet.setRemark(rs.getString("remark"));
+				osList.add(osheet);
+			}
+		} catch (SQLException e) {
+			System.out.println("getOrdered: " + e);
+		} finally {
+			if(rs != null) close(rs, pstmt, con);
+			else close(pstmt, con);
+		}
+		return osList;
+	}
+	
+	public ArrayList<OSheetVO> getOrderedList(String orderer) {
+		ArrayList<OSheetVO> List = new ArrayList<OSheetVO>();
+		OSheetVO osheet = null;
+		Connection con = connect();
+		String sql = "select * from osheet where orderer = ? order by orderTime desc";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, orderer);
+			rs = pstmt.executeQuery();
+			while(rs.next()) {
+				osheet = new OSheetVO();
+				osheet.setoNum(rs.getString("oNum"));
+				osheet.setOrderTime(rs.getString("orderTime"));
+				osheet.setpNum(rs.getString("pNum"));
+				osheet.setsOption(rs.getString("sOption"));
+				osheet.setQuantity(rs.getInt("quantity"));
+				osheet.setBill(rs.getInt("bill"));
+				osheet.setRemark(rs.getString("remark"));
+				List.add(osheet);
+			}
+		} catch (SQLException e) {
+			System.out.println("getOrderedList: " + e);
+		} finally {
+			if(rs != null) close(rs, pstmt, con);
+			else close(pstmt, con);
+		}
+		return List;
+	}
+
+	public ODetailVO getODetail(String oNum) {
+		ODetailVO oDetail = null;
+		Connection con = connect();
+		String sql = "select * from oDetail where oNum = ?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, oNum);
+			rs = pstmt.executeQuery();
+			if(rs.next()) {
+				oDetail = new ODetailVO();
+				oDetail.setoNum(oNum);
+				oDetail.setoName(rs.getString("oName"));
+				oDetail.setoAddr(rs.getString("oAddr"));
+				oDetail.setoPhone(rs.getString("oPhone"));
+				oDetail.setoEmail1(rs.getString("oEmail1"));
+				oDetail.setoEmail2(rs.getString("oEmail2"));
+				oDetail.setrName(rs.getString("rName"));
+				oDetail.setrAddr(rs.getString("rAddr"));
+				oDetail.setrPhone(rs.getString("rPhone"));
+				oDetail.setrText(rs.getString("rText"));
+			}
+		} catch (SQLException e) {
+			System.out.println("getODetail: " + e);
+		} finally {
+			if(rs != null) close(rs, pstmt, con);
+			else close(pstmt, con);
+		}
+		return oDetail;
+	}
+
+	public ArrayList<ItemVO> getCompletedProd(ArrayList<OSheetVO> osList) {
+		ArrayList<ItemVO> itemList = new ArrayList<ItemVO>();
+		Connection con = connect();
+		String sql  = "select * from item where pNum=? and sOption=?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ItemVO item = null;
+		
+		try {
+			for(int i = 0; i < osList.size(); ++i) {
+				OSheetVO osheet = osList.get(i);
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, osheet.getpNum());
+				pstmt.setString(2, osheet.getsOption());
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					// 장바구니 안에 있는 물건 목록을 가져옴
+					item = new ItemVO();
+					item.setCategory(rs.getString("category"));
+					item.setpNum(rs.getString("pNum"));
+					item.setName(rs.getString("name"));
+					item.setsOptions(rs.getString("sOption"));
+					item.setPrice(rs.getInt("price"));
+					item.setUrl(rs.getString("url"));
+					itemList.add(item);
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println("getSelected: " + e);
+		} finally {
+			if(rs != null) close(rs, pstmt, con);
+			else close(pstmt, con);
+		}
+		return itemList;
 	}
 }

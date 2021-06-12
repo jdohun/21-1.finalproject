@@ -44,17 +44,27 @@ let DeleteOrderProd = function() { // 선택한 체크박스 해제
 };
 
 let SameInfor = function(radioSame){
-		if(radioSame.checked) {
-			let oName = document.getElementById("oname");
-			let receiverName = document.getElementsByName("receiverName")[0];
-			receiverName.setAttribute("value", oName.value);
-			
-			let oAddr = document.getElementsByName("oAddr")[0];
-			let receiverAddr = document.getElementsByName("receiverAddr")[0];
-			receiverAddr.setAttribute("value", oAddr.value);
-			
-			let oPhone = document.getElementsByName("oPhone")[0];
-			let receiverPhone = document.getElementsByName("receiverPhone")[0];
-			receiverPhone.setAttribute("value", oPhone.value);
-		}
-	};
+	if(radioSame.checked) {
+		let oName = document.getElementById("oname");
+		let receiverName = document.getElementsByName("receiverName")[0];
+		receiverName.setAttribute("value", oName.value);
+		
+		let oAddr = document.getElementsByName("oAddr")[0];
+		let receiverAddr = document.getElementsByName("receiverAddr")[0];
+		receiverAddr.setAttribute("value", oAddr.value);
+		
+		let oPhone = document.getElementsByName("oPhone")[0];
+		let receiverPhone = document.getElementsByName("receiverPhone")[0];
+		receiverPhone.setAttribute("value", oPhone.value);
+	}
+};
+
+let checkMoney = function(){
+	let con_res = confirm("금액이 부족합니다. 충전페이지로 이동하시겠습니까?");
+	if(con_res == true){
+		window.location.href = 'charge.jsp';
+	}
+	else{
+		return alert("결제가 진행되지 않습니다");
+	}
+}

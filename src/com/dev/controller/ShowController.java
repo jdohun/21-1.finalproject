@@ -19,7 +19,7 @@ public class ShowController extends HttpServlet {
 		list.put("/cart.show",  new ShowCartController());
 		list.put("/cartAllOrder.show",  new ShowCartAllOrderController());
 		list.put("/selectedOrder.show",  new ShowSelectedOrderController());
-		list.put("/orderCompleted.show",  new ShowOrderCompletedController());
+		list.put("/orderList.show",  new ShowOrderListController());
 	}
 	
 	@Override

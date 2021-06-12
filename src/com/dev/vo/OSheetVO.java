@@ -1,14 +1,13 @@
 package com.dev.vo;
 
-import java.security.Timestamp;
-
-public class OsheetVO {
+public class OSheetVO {
 	private String oNum;
 	private String orderer;
 	private String pNum;
 	private String sOption;
 	private int quantity;
-	private Timestamp orderTime;
+	private int bill;
+	private String orderTime;
 	private String remark;
 	
 	public String getoNum() {
@@ -41,10 +40,16 @@ public class OsheetVO {
 	public void setQuantity(int quantity) {
 		this.quantity = quantity;
 	}
-	public Timestamp getOrderTime() {
+	public int getBill() {
+		return bill;
+	}
+	public void setBill(int bill) {
+		this.bill = bill;
+	}
+	public String getOrderTime() {
 		return orderTime;
 	}
-	public void setOrderTime(Timestamp orderTime) {
+	public void setOrderTime(String orderTime) {
 		this.orderTime = orderTime;
 	}
 	public String getRemark() {

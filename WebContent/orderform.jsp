@@ -44,7 +44,7 @@
 		<div class="titleArea">
 			<h2>ORDER FORM</h2>
 		</div>
-		<form class="orderForm" action="" method="post">
+		<form class="orderForm" id="orderForm" action="" method="post">
 		<div id="orderListArea">
 			<div class="title"><h3>주문내역</h3></div>
 			<table class="orderListTable">
@@ -134,9 +134,9 @@
 				<tr>
 					<th>이메일</th>
 					<td>
-						<input type="text" name="oemail1" class="mailId" id="email1" required value="<%=user.getEmail1()%>">
+						<input type="text" name="oemail1" class="mailId" id="email1" value="<%=user.getEmail1()%>">
 						@
-						<input type="text" name="oemail2" class="mailAddr" id="email2" required value="<%=user.getEmail2() %>">
+						<input type="text" name="oemail2" class="mailAddr" id="email2" value="<%=user.getEmail2() %>">
 						<select id="email3">
 							<option value selected>- 이메일 선택 -</option>
 							<option value="naver.com">naver.com</option>
@@ -205,20 +205,24 @@
 				<tbody>
 					<tr>
 						<% String sMoney = (String)commas.format(money); %>
-						<td id="finalPrice" style="font-size:28px; font-weight:bold;"><%=sMoney %></td>
+						<td id="myMoney" style="font-size:28px; font-weight:bold;"><%=sMoney %></td>
 						<%
 							money = money - allTotal;
 							String sResult = (String)commas.format(money);
 							if(money < 0){
 						%>
-							<td style="font-size:28px; font-weight:bold; color:red;"><%=sResult %></td>
+							<td id="resultMoney" style="font-size:28px; font-weight:bold; color:red;"><%=sResult %></td>
 						<%} else{%>
-							<td style="font-size:28px; font-weight:bold;"><%=sResult %></td>
+							<td id="resultMoney" style="font-size:28px; font-weight:bold;"><%=sResult %></td>
 						<%} %>
 					</tr>
 				</tbody>
 			</table>
-				<input type="submit" id="submit" value="결제하기" onclick="javascript:form.action='orderCompleted.order';">
+				<% if(money > allTotal){	%>
+				<input type="submit" id="submit" value="결제하기" onclick="javascript:form.action='orderCompleted.order'">
+				<% }else {%>
+				<input type="submit" id="submit" value="결제하기" onclick="checkMoney();">
+				<%} %>
 			</div>
 			<div>
 				<span>총 적립예정금액</span>
@@ -236,6 +240,4 @@
 <!--/Wrapper-->
 </body>
 <script defer src="js/orderform.js"></script>
-<script type="text/javascript">
-</script>
 </html>

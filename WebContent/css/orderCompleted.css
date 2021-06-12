@@ -49,11 +49,11 @@ table, th, td {
 	padding-left: 10px;
 }
 
-.orderInfoTable, .orderInfoTable th {
+.orderInfoTable, .orderInfoTable th, .orderInfoTable td {
 	border-left: none;
 }
 
-.orderInfoTable, .orderInfoTable td {
+.orderInfoTable, .orderInfoTable th, .orderInfoTable td {
 	padding-left: 10px;
 	border-right: none;
 }

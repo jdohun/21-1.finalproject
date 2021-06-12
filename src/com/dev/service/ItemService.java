@@ -5,6 +5,8 @@ import java.util.ArrayList;
 import com.dev.dao.ItemDAO;
 import com.dev.vo.CartVO;
 import com.dev.vo.ItemVO;
+import com.dev.vo.ODetailVO;
+import com.dev.vo.OSheetVO;
 import com.dev.vo.UserVO;
 
 public class ItemService {
@@ -37,7 +39,23 @@ public class ItemService {
 		return dao.getSelected(orderer, prod);
 	}
 
-	public UserVO orderComplete(String date, String orderer, ArrayList<String> prod) {
-		return dao.orderComplete(date, orderer, prod);
+	public UserVO orderComplete(String orderer, ArrayList<String> prod, ODetailVO oDetail) {
+		return dao.orderComplete(orderer, prod, oDetail);
+	}
+	
+	public ArrayList<OSheetVO> getOrdered(String orderer, int prodCount) {
+		return dao.getOrdered(orderer, prodCount);
+	}
+
+	public ODetailVO getODetail(String oNum) {
+		return dao.getODetail(oNum);
+	}
+
+	public ArrayList<ItemVO> getCompletedProd(ArrayList<OSheetVO> osList) {
+		return dao.getCompletedProd(osList);
+	}
+
+	public ArrayList<OSheetVO> getOrderList(String orderer) {
+		return dao.getOrderedList(orderer);
 	}
 }
