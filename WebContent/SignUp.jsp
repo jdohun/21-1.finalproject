@@ -51,7 +51,7 @@
 					</tr>
 					<tr>
 						<th>휴대전화</th>
-						<td><input type="number" name="SignUpPhone" maxlength="11" placeholder="공백과 '-' 없이 숫자만" ></td>
+						<td><input type="number" name="SignUpPhone" maxlength="11" placeholder="공백과 '-' 없이 숫자만"  oninput="numberMaxLength(this);"></td>
 					</tr>
 					<tr>
 						<th>이메일</th>
@@ -71,4 +71,5 @@
 </div>
 <!--/Wrapper-->
 </body>
+<script defer src="js/numberMaxLength.js"></script>
 </html>

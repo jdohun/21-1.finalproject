@@ -18,10 +18,12 @@ public class FrontController extends HttpServlet {
 		list.put("/signUp.do", new SignUpController());
 		list.put("/login.do", new LoginController());
 		list.put("/charge.do", new ChargeController());
+		list.put("/modify.do", new ModifyController());
 	}
 	
 	@Override
 	protected void service(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
+		req.setCharacterEncoding("UTF-8");
 		String path = req.getServletPath();	// *.do path 저장
 		Controller subController = list.get(path);	// path에 맞는 Controller 반환
 		subController.execute(req, resp);

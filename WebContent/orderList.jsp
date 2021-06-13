@@ -32,10 +32,10 @@
 <%@ include file="Header_guest.jsp"%>
 <!--/header-->
 <!--main-->
-<div id="Container">
+<div id="Container" style="min-height: 800px;">
 	<div class="contents">
 		<div class="titleArea">
-			<h2>ORDER COMPLETED</h2>
+			<h2>ORDER LIST</h2>
 		</div>
 		<div class="orderInfo">
 		<div class="title"><h3>주문정보</h3></div>
@@ -58,11 +58,11 @@
 				%>
 				<tr>
 					<td>
-						주문번호 : [<%=osheet.getoNum() %>]<br>
+						주문번호 : <a href="odetail.show?oNum=<%=osheet.getoNum()%>">[<%=osheet.getoNum() %>]</a><br>
 						주문시간 : <%=osheet.getOrderTime() %>
 					</td>
 					<td>
-						<a href="#"><img alt="" src=<%=item.getUrl() %> style="height:80px;"></a>
+						<a href="description.show?pNum=<%=item.getName() %>"><img alt="" src=<%=item.getUrl() %> style="height:80px;"></a>
 					</td>
 					<td>
 						<%=item.getName() %><br>

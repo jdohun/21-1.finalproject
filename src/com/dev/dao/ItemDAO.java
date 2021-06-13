@@ -9,6 +9,8 @@ import java.sql.Timestamp;
 import java.text.SimpleDateFormat;
 import java.util.ArrayList;
 
+import org.apache.tomcat.jni.OS;
+
 import com.dev.vo.CartVO;
 import com.dev.vo.ItemVO;
 import com.dev.vo.ODetailVO;
@@ -236,6 +238,7 @@ public class ItemDAO {
 		
 		try {
 			for(int i = 0; i < prod.size(); i+=3) {
+				// 주문번호 생성
 				SimpleDateFormat format = new SimpleDateFormat("yyMMddhhmmss");
 				Timestamp now = new Timestamp(System.currentTimeMillis());
 				String date = format.format(now);
@@ -246,6 +249,8 @@ public class ItemDAO {
 					char cValue = (char)((dValue * 26) + 65);   // 대문자
 					oNum += cValue;
 				}
+				
+				// 상품당 계산서 생성
 				String pNum = prod.get(i);
 				String sOption = prod.get(i+1);
 				int quantity = Integer.parseInt(prod.get(i+2));
@@ -255,6 +260,9 @@ public class ItemDAO {
 				thisOrder.add(prod.get(i+2));
 				int bill = checkBill(orderer, thisOrder);
 				
+				ODetailVO OD = new ODetailVO();
+				
+				//
 				pstmt = con.prepareStatement(sql);
 				pstmt.setString(1, oNum);
 				pstmt.setString(2, orderer);
@@ -263,8 +271,19 @@ public class ItemDAO {
 				pstmt.setInt(5, quantity);
 				pstmt.setInt(6, bill);
 				result = pstmt.executeUpdate();
-				oDetail.setoNum(oNum);
-				oDetList.add(oDetail);
+				
+				OD.setoNum(oNum);
+				OD.setoName(oDetail.getoName());
+				OD.setoAddr(oDetail.getoAddr());
+				OD.setoPhone(oDetail.getoPhone());
+				OD.setoEmail1(oDetail.getoEmail1());
+				OD.setoEmail2(oDetail.getoEmail2());
+				OD.setrName(oDetail.getrName());
+				OD.setrAddr(oDetail.getrAddr());
+				OD.setrPhone(oDetail.getrPhone());
+				OD.setrText(oDetail.getrText());
+				
+				oDetList.add(OD);
 				finalBill += bill;
 			}
 		} catch (SQLException e) {
@@ -349,7 +368,7 @@ public class ItemDAO {
 		return UserDAO.getInstance().getUser(orderer);
 	}
 	
-	private void deleteCart(String orderer, ArrayList<String> prod) {
+	public void deleteCart(String orderer, ArrayList<String> prod) {
 		Connection con = connect();
 		String sql = "delete from cart where orderer = ? and pNum=? and sOption = ?";
 		PreparedStatement pstmt = null;
@@ -529,5 +548,80 @@ public class ItemDAO {
 			else close(pstmt, con);
 		}
 		return itemList;
+	}
+
+	public ArrayList<ItemVO> getDirect(ArrayList<CartVO> cartList) {
+		ArrayList<ItemVO> itemList = new ArrayList<ItemVO>();
+		Connection con = connect();
+		String sql  = "select i.category, i.pNum, i.name, c.sOption, i.price, i.url, c.quantity from item i, cart c where c.orderer = ? and c.pNum=? and c.sOption = ?  and c.pNum = i.pNum group by sOption;";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		ItemVO item = null;
+		String orderer = cartList.get(0).getOrderer();
+		try {
+			for(int i = 0; i < cartList.size(); ++i) {
+				CartVO cartItem = cartList.get(i);
+				String pNum = cartItem.getpNum();
+				String sOption = cartItem.getsOption();
+				
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, orderer);
+				pstmt.setString(2, pNum);
+				pstmt.setString(3, sOption);
+				rs = pstmt.executeQuery();
+				while(rs.next()) {
+					// 장바구니 안에 있는 물건 목록을 가져옴
+					item = new ItemVO();
+					item.setCategory(rs.getString("category"));
+					item.setpNum(rs.getString("pNum"));
+					item.setName(rs.getString("name"));
+					item.setsOptions(rs.getString("sOption"));
+					item.setPrice(rs.getInt("price"));
+					item.setQuantity(rs.getInt("quantity"));
+					item.setUrl(rs.getString("url"));
+					itemList.add(item);
+				}
+			}
+		} catch (SQLException e) {
+			System.out.println("getDirect: " + e);
+		} finally {
+			if(rs != null) close(rs, pstmt, con);
+			else close(pstmt, con);
+		}
+		return itemList;
+	}
+
+	public OSheetVO getOSheet(String oNum) {
+		Connection con = connect();
+		String sql = "select * from oSheet where oNum=?";
+		PreparedStatement pstmt = null;
+		ResultSet rs = null;
+		OSheetVO oSheet = null;
+		
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, oNum);
+			rs = pstmt.executeQuery();
+			
+			if(rs.next()) {
+				oSheet = new OSheetVO();
+				oSheet.setoNum(oNum);
+				oSheet.setOrderer(rs.getString("orderer"));
+				oSheet.setpNum(rs.getString("pNum"));
+				oSheet.setsOption(rs.getString("sOption"));
+				oSheet.setQuantity(rs.getInt("quantity"));
+				oSheet.setBill(rs.getInt("bill"));
+				oSheet.setOrderTime(rs.getString("orderTime"));
+				oSheet.setRemark(rs.getString("remark"));
+			}
+			
+		} catch (SQLException e) {
+			System.out.println("ItemDAO showItem: " + e);
+		} finally {
+			if(rs != null) close(rs, pstmt, con);
+			else close(pstmt, con);
+		}
+		
+		return oSheet;
 	}
 }

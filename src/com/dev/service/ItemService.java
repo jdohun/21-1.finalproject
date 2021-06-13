@@ -58,4 +58,16 @@ public class ItemService {
 	public ArrayList<OSheetVO> getOrderList(String orderer) {
 		return dao.getOrderedList(orderer);
 	}
+
+	public ArrayList<ItemVO> getDirect(ArrayList<CartVO> cartList) {
+		return dao.getDirect(cartList);
+	}
+
+	public void deleteCart(String orderer, ArrayList<String> prod) {
+		dao.deleteCart(orderer, prod);
+	}
+
+	public OSheetVO getOSheet(String oNum) {
+		return dao.getOSheet(oNum);
+	}
 }

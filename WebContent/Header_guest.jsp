@@ -20,8 +20,8 @@
 			<ul>
 				<li><a href="login.jsp">LOGIN</a></li>
 				<li><a href="SignUp.jsp">JOIN</a></li>
-				<li><a href="login.jsp">MYPAGE</a></li>
-				<li><a href="login.jsp">BOARD</a></li>
+				<li><a href="MyPage.jsp">MYPAGE</a></li>
+				<li><a href="#">BOARD</a></li>
 				<li><a href="login.jsp">CART</a></li>
 				<li id="search_box"><input type="text" name="search"> <button id="search_button">Search</button></li>
 			</ul>

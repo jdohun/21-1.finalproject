@@ -186,4 +186,27 @@ public class UserDAO {
 		}
 		return user;
 	}
+
+	public int modify(UserVO user) {
+		Connection con = connect();
+		String sql = "update user set Pwd = ?, Phone=?, Addr=?, email1=?, email2=?  where id=?";
+		PreparedStatement pstmt = null;
+		int result = 0;
+		try {
+			pstmt = con.prepareStatement(sql);
+			pstmt.setString(1, user.getPwd());
+			pstmt.setString(2, user.getPhone());
+			pstmt.setString(3, user.getAddr());
+			pstmt.setString(4, user.getEmail1());
+			pstmt.setString(5, user.getEmail2());
+			pstmt.setString(6, user.getId());
+			result = pstmt.executeUpdate();
+			
+		} catch (SQLException e) {
+			System.out.println("UserDAO-modify: " + e);
+		} finally {
+			close(pstmt, con);
+		}
+		return result;
+	}
 }

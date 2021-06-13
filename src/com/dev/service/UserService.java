@@ -24,4 +24,8 @@ public class UserService {
 	public UserVO charge(UserVO user, String charge) {
 		return dao.charge(user, charge);
 	}
+
+	public int modify(UserVO user) {
+		return dao.modify(user);
+	}
 }

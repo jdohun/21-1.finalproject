@@ -12,6 +12,35 @@
 	<link rel="stylesheet" href="css/nav.css">
 	<link rel="stylesheet" href="css/Footer.css">
 	<link rel="stylesheet" href="css/charge.css">
+<style>
+	.plus {
+		width:100px;
+		height:40px;
+		background: #ggg;
+		margin: 30px 0;
+	}
+	.plus:hover {
+		opacity: 0.7;
+		cursor: pointer;
+	}
+	
+	#money {
+		font-size: 15px;
+		margin:8px;
+	}
+	
+	#submit {
+		width:180px;
+		height:50px;
+		background: #000;
+		color: #fff;
+	}
+	
+	#submit:hover {
+		opacity: 0.7;
+		cursor: pointer;
+	}
+</style>
 </head>
 <%	
 	String id = (String)request.getSession().getAttribute("id");
@@ -31,19 +60,19 @@
 <!--main-->
 <div id="Container">
 	<div class="contents">
-		<div class="titleArea">
-			Charge
+		<div class="titleArea" style="margin-top:100px; margin-bottom: 30px; ">
+			<h3>CHARGE</h3>
 		</div>
-		<p>보유중인 금액 : <%=sNowMoney %></p>
-		<p>충전 후 금액 : <span></span></p>
+		<p id="money">보유중인 금액 : <%=sNowMoney %></p>
+		<!-- <p>충전 후 금액 : <span></span></p> -->
 		<form action="charge.do" method="post">
 			<input type="number" id="charge" name="charge" placeholder="금액을 입력해주세요" value="0"> <button type="button" id="reset">X</button>
-			<hr>
-			<button type="button" id="plus1">+1만원</button>
-			<button type="button" id="plus5">+5만원</button>
-			<button type="button" id="plus10">+10만원</button>
-			<button type="button" id="plus30">+30만원</button>
-			<br><input type="submit" value="충전하기">
+			<br>
+			<button type="button" id="plus1" class="plus">+1만원</button>
+			<button type="button" id="plus5" class="plus">+5만원</button>
+			<button type="button" id="plus10" class="plus">+10만원</button>
+			<button type="button" id="plus30" class="plus">+30만원</button>
+			<br><input type="submit" id="submit" value="충전하기">
 		</form>
 	</div>
 </div>

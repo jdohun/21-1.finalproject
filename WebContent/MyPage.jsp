@@ -9,6 +9,7 @@
 	<link rel="stylesheet" href="css/Header.css">
 	<link rel="stylesheet" href="css/nav.css">
 	<link rel="stylesheet" href="css/Footer.css">
+	<link rel="stylesheet" href="css/MyPage.css">
 </head>
 <%	
 	String id = (String)request.getSession().getAttribute("id");
@@ -20,20 +21,31 @@
 <!--Wrapper-->
 <div id="Wrapper">
 <!--header-->
-<%@ include file="Header_user.jsp"; %>
+<%@ include file="Header_user.jsp" %>
 <!--/header-->
 <!--main-->
 <div id="Container">
 	<div class="contents">
 		<div class="titleArea">
-			
+			<h3>MY PAGE</h3>
 		</div>
-		
+		<div class="box">
+			<a href="orderList.show" class="mypages">
+				<h3><strong>ORDER</strong></h3>
+				<p>고객님께서 주문하신 상품의 주문내역을<br> 확인하실 수 있습니다.</p>
+			</a>
+		</div>
+		<div class="box">
+			<a href="modify.jsp" class="mypages">
+				<h3><strong>PROFILE</strong></h3>
+				<p>회원이신 고객님의 개인정보를 관리하는 공간입니다.</p>
+			</a>
+		</div>
 	</div>
 </div>
 <!--/main-->
 <!--footer-->
-<%@ include file="Footer.jsp"; %>
+<%@ include file="Footer.jsp" %>
 <!--/footer-->
 </div>
 <!--/Wrapper-->

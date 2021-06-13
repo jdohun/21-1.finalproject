@@ -16,10 +16,13 @@ public class ShowController extends HttpServlet {
 	public void init(ServletConfig config) throws ServletException {
 		list.put("/index.show", new ShowAllController());
 		list.put("/description.show",  new ShowDescriptionController());
+		list.put("/orderform.show",  new ShowOrderFormController());
 		list.put("/cart.show",  new ShowCartController());
 		list.put("/cartAllOrder.show",  new ShowCartAllOrderController());
 		list.put("/selectedOrder.show",  new ShowSelectedOrderController());
 		list.put("/orderList.show",  new ShowOrderListController());
+		list.put("/deleteCart.show",  new ShowDeleteCartController());
+		list.put("/odetail.show",  new ShowOrderDetailController());
 	}
 	
 	@Override

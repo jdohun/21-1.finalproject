@@ -94,9 +94,9 @@
 						<td>무료</td>
 						<td><strong><%= totalPrice %></strong></td>
 						<td>
-							<a href=""><button>주문하기</button></a><br>
+							<a href=""><button onclick="selectThis(this);javascript: form.action='selectedOrder.show';">주문하기</button></a><br>
 							<a href=""><button>관심상품등록</button></a><br>
-							<a href=""><button>삭제</button></a><br>
+							<a href=""><button type="submit" onclick="selectThis(this);javascript: form.action='deleteCart.show';">삭제</button></a><br>
 						</td>
 					</tr>
 				<%} 
@@ -105,7 +105,7 @@
 			</table>
 			<a href="" id="btnBuyAlll"><button type="submit" onclick="BselectAll();javascript: form.action='cartAllOrder.show';">전체상품주문</button></a>
 			<a href="" id="btnBuySelected"><button type="submit" onclick=";javascript: form.action='selectedOrder.show';">선택상품주문</button></a>
-			<a href="" id="btnHome"><button>쇼핑계속하기</button></a>
+			<a href="index.jsp" id="btnHome"><button>쇼핑계속하기</button></a>
 		</form>
 		</div>
 	</div>
@@ -155,5 +155,12 @@ let BselectAll = function(){
 	});
 }
 
+let selectThis = function(button) {
+	let checkboxes = document.getElementsByName("prod");
+	checkboxes.forEach((checkbox)=>{
+		checkbox.checked = false;
+	});
+	button.parentElement.parentElement.parentElement.firstElementChild.children[0].checked = true
+}
 </script>
 </html>

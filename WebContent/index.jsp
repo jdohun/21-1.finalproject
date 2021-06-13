@@ -35,7 +35,7 @@
 <div id="Container">
 	<div class="contents">
 		<div class="titleArea">
-				<h3>MAIN</h3>
+			<h3 style="margin-top: 100px;margin-bottom: 30px;font-size: 30px;">MAIN</h3>
 		</div>
 		<div class="itemList">
 			<ul>

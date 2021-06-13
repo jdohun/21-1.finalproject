@@ -1,6 +1,6 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
-<%@ page import="java.util.ArrayList" %>
+<%@ page import="com.dev.vo.UserVO" %>
 <%@ page import="com.dev.vo.ItemVO" %>
 <%@ page import="com.dev.vo.OSheetVO" %>
 <%@ page import="com.dev.vo.ODetailVO" %>
@@ -22,9 +22,10 @@
 		response.sendRedirect("login.jsp");
 	}
 	DecimalFormat commas = new DecimalFormat("###,###");
-	ArrayList<ItemVO> itemList = (ArrayList<ItemVO>)request.getAttribute("itemList");
-	ArrayList<OSheetVO> osList = (ArrayList<OSheetVO>)request.getAttribute("osList");
+	UserVO user = (UserVO)request.getAttribute("user");
 	ODetailVO oDetail = (ODetailVO)request.getAttribute("oDetail");
+	ItemVO item = (ItemVO)request.getAttribute("item");
+	OSheetVO oSheet = (OSheetVO)request.getAttribute("oSheet");
 %>
 <body>
 <!--Wrapper-->
@@ -41,25 +42,26 @@
 		<div class="orderInfo">
 			<div class="title"><h3>주문정보</h3></div>
 			<table class="orderInfoTable">
-				<%for(int i = 0; i<osList.size(); ++i){ %>
 				<tr>
 					<th>주문번호</th>
-					<td><%= %></td>
+					<td><%=oSheet.getoNum() %></td>
 				</tr>
 				<tr>
 					<th>주문일자</th>
-					<td><%= %></td>
+					<td><%=oSheet.getOrderTime() %></td>
 				</tr>
 				<tr>
 					<th>주문자</th>
-					<td><%= %></td>
+					<td><%=oDetail.getoName() %></td>
 				</tr>
 				<tr>
 					<th>주문처리상태</th>
+					<%if(oSheet.getRemark().equals("")){ %>
 					<td>결제완료 <button>주문취소</button></td>
+					<% }else{%>
+					<td><%=oSheet.getRemark() %></td>
+					<%} %>
 				</tr>
-				
-				<%} %>
 			</table>
 		</div>
 		<div id="orderListArea">
@@ -77,24 +79,32 @@
 				</thead>
 				<tbody>
 					<tr>
-						<td><a href=""><img src="#" alt="주문상품"></a></td>
 						<td>
-							<a href="">
-								<strong class="name">버핑레더 라이더자켓</strong>
+							<a href="description.show?pNum=<%=item.getName() %>">
+								<img src="<%=item.getUrl() %>" alt="주문상품" style="height:80px;">
 							</a>
-							<div class="option">[옵션: S]</div>
 						</td>
-						<td>24,000</td>
-						<td>1</td>
+						<td>
+							<a href="description.show?pNum=<%=item.getName() %>">
+								<strong class="name"><%=item.getName() %></strong>
+							</a>
+							<div class="option">[옵션: <%=item.getsOptions() %>]</div>
+						</td>
+						<td><%=item.getPrice() %></td>
+						<td><%=oSheet.getQuantity() %></td>
+						<%if(oSheet.getRemark().equals("")){ %>
 						<td>결제완료</td>
-						<td><strong><span>24,000</span></strong></td>
+						<% }else{%>
+						<td><%=oSheet.getRemark() %></td>
+						<%} %>
+						<td><strong><span><%=oSheet.getBill() %></span></strong></td>
 					</tr>
 				</tbody>
 				<tfoot>
 					<td></td>
 					<td colspan="8">
 						<span>
-							상품구매금액 <strong>24,000</strong> + 배송비 0 (무료) = 합계:  <strong>24,000</strong>
+							상품구매금액 <strong><%=oSheet.getBill() %></strong> + 배송비 0 (무료) = 합계:  <strong><%=oSheet.getBill() %></strong>
 						</span>
 					</td>
 				</tfoot>
@@ -105,25 +115,25 @@
 			<table class="orderAreaTable">
 				<tr>
 					<th>받으시는 분</th>
-					<td><span>정도훈</span></td>
+					<td><span><%=oDetail.getrName() %></span></td>
 				</tr>
 				<tr>
 					<th>주소</th>
-					<td><span>서울시 은평구</span></td>
+					<td><span><%=oDetail.getrAddr()%><</span></td>
 				</tr>
 				<tr>
 					<th>휴대전화</th>
-					<td><span>010-1234-5678</span></td>
+					<td><span><%=oDetail.getrPhone() %><</span></td>
 				</tr>
 				<tr>
 					<th>배송 메시지</th>
-					<td><span>호잇</span></td>
+					<td><span><%=oDetail.getrText() %><</span></td>
 				</tr>
 			</table>
 		</div>
 		<div class="buttonPlace">
 			<span class="buttonShpae">
-				<a href="" id="showOrderList">주문목록보기</a>
+				<a href="orderList.show" id="showOrderList">주문목록보기</a>
 			</span>
 		</div>
 	</div>

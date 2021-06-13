@@ -12,7 +12,7 @@ import com.dev.service.ItemService;
 import com.dev.vo.ItemVO;
 import com.dev.vo.UserVO;
 
-public class ShowCartController implements Controller {
+public class ShowDeleteCartController implements Controller {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
 		HttpSession session = req.getSession();
@@ -20,9 +20,19 @@ public class ShowCartController implements Controller {
 		session.setAttribute("user", user);
 		
 		String orderer = (String)req.getSession().getAttribute("id");
-		ArrayList<ItemVO> itemList = ItemService.getInstance().showCartAll(orderer); 
-		req.setAttribute("itemList", itemList);
-		String path = "cart.jsp";
+		String[] prodSOption = (String[])req.getParameterValues("prod"); // pNum,sOption
+
+		ArrayList<String> prod = new ArrayList<String>();
+		
+		for(int i = 0; i<prodSOption.length; ++i) {
+			String[] prodTemp = prodSOption[i].split(",");
+			prod.add(prodTemp[0]);
+			prod.add(prodTemp[1]);
+		}
+		
+		ItemService.getInstance().deleteCart(orderer, prod);
+		
+		String path = "cart.show";
 		HttpUtil.forward(req, resp, path);
 	}
 }

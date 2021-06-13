@@ -21,10 +21,10 @@
 			<ul>
 				<li><a href="LogOut.jsp">LOGOUT</a></li>
 				<li><a href="modify.jsp">MODIFY</a></li>
-				<li><a href="">MYPAGE</a></li>
-				<li><a href="charge.jsp">BOARD</a></li>
+				<li><a href="MyPage.jsp">MYPAGE</a></li>
+				<li><a href="#">BOARD</a></li>
 				<li><a href="cart.show">CART</a></li>
-				<li id="search_box"><input type="text" name="search"> <button id="search_button">Search</button></li>
+				<li id="search_box"><input type="text" name="search"><button id="search_button">Search</button></li>
 			</ul>
 		</div>
 	</div>

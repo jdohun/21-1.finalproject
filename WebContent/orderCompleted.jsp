@@ -30,7 +30,7 @@
 <!--Wrapper-->
 <div id="Wrapper">
 <!--header-->
-<%@ include file="Header_guest.jsp"%>
+<%@ include file="Header_user.jsp"%>
 <!--/header-->
 <!--main-->
 <div id="Container">
@@ -63,7 +63,9 @@
 							주문시간 : <%=osheet.getOrderTime() %>
 						</td>
 						<td>
-							<a href="#"><img alt="" src=<%=item.getUrl() %> style="height:80px;"></a>
+							<a href="description.show?pNum=<%=item.getName() %>">
+								<img src="<%=item.getUrl() %>" alt="주문상품" style="height:80px;">
+							</a>
 						</td>
 						<td>
 							<%=item.getName() %><br>
@@ -104,7 +106,7 @@
 		</div>
 		<div class="buttonPlace">
 			<span class="buttonShpae">
-				<a href="showOrderList.show" id="showOrderList">주문목록보기</a>
+				<a href="orderList.show" id="showOrderList">주문목록보기</a>
 			</span>
 		</div>
 	</div>

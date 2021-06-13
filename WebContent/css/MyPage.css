@@ -1,0 +1,29 @@
+.contents {
+	min-width: 900px;
+	width: 100%;
+	padding: 0 5%;
+	text-align: center;
+	margin-top: 140px;
+}
+
+.mypages {
+	display:inline-block;
+	padding: 20px;
+	width :300px; 
+	height: 100px;
+	border: 1px solid #999;
+}
+
+.mypages strong {
+	font-size: 14px;
+	font-weight: 900;
+	margine-bottom: 5px; 
+}
+
+.mypages p {
+	font-size: 11px;
+}
+
+.mypages:hover{
+	opacity: 0.7;
+}
