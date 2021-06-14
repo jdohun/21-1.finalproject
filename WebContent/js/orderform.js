@@ -25,14 +25,15 @@ let checkSelectAll = function(){ //각각 전체가 체크되면 전체 체크 �
 	}
 };
 
-let DeleteOrderProd = function() { // 선택한 체크박스 해제
+/*
+let DeleteOrderProd = function() { // 선택한 체크박스 삭제
 	// 테이블
 	let Table = document.getElementsByClassName("orderListTable")[0];
 	let row = Table.rows.length;
 
 	for(let i = 1; i < row-1; ++i){ //두번째 행부터 시작 마지막 행 제외
 		// Table의 i번째행에서 0번째 셀의 0번째 객체의 checked 값 (bool);
-		let checked = Table.rows[i].cells[0].childNodes[0].checked;
+		let checked = Table.rows[i].children[0].children[0].checked;
 
 		if(checked){ // 선택되어있으면 true 이므로 삭제
 			Table.deleteRow(i);
@@ -42,6 +43,7 @@ let DeleteOrderProd = function() { // 선택한 체크박스 해제
 		}
 	}
 };
+*/
 
 let SameInfor = function(radioSame){
 	if(radioSame.checked) {
@@ -66,5 +68,14 @@ let checkMoney = function(){
 	}
 	else{
 		return alert("결제가 진행되지 않습니다");
+	}
+}
+
+let FRequired = function(){
+	let inputs = document.querySelectorAll("input");
+	for( i = 0; i < inputs.length; ++i){
+		let input = inputs[i];
+		input.setAttribute("required","false")
+		console.log(input.hasAttribute("result"));
 	}
 }

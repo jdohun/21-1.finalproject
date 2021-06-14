@@ -100,7 +100,7 @@ public class ItemDAO {
 
 	public ItemVO showItem(String pNum) {
 		Connection con = connect();
-		String sql = "select *, group_concat(sOption) as sOptions from item where name=? group by name;";
+		String sql = "select *, group_concat(sOption) as sOptions from item where pNum=? group by name;";
 		PreparedStatement pstmt = null;
 		ResultSet rs = null;
 		ItemVO item = null;
@@ -109,7 +109,6 @@ public class ItemDAO {
 			pstmt = con.prepareStatement(sql);
 			pstmt.setString(1, pNum);
 			rs = pstmt.executeQuery();
-			
 			if(rs.next()) {
 				item = new ItemVO();
 				item.setCategory(rs.getString("Category"));
@@ -126,7 +125,6 @@ public class ItemDAO {
 			if(rs != null) close(rs, pstmt, con);
 			else close(pstmt, con);
 		}
-		
 		return item;
 	}
 

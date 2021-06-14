@@ -47,7 +47,7 @@
 							String sPrice = commas.format(iPrice);
 				%>
 				<li>
-					<a href="description.show?pNum=<%=item.getName() %>">
+					<a href="description.show?pNum=<%=item.getpNum() %>">
 						<div class="itembox">
 							<img src=<%=item.getUrl()%> alt="상품사진" class="thumb">
 						</div>

@@ -1,6 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+.user a {
+	font-size: 22px;
+}
 
+#nav a {
+	font-size: 22px;
+}
+</style>
 <div id="Header" class="Header">
 	<div class="Header_inner">
 		<div class="catego">

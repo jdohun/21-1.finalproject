@@ -60,7 +60,7 @@
 <!--main-->
 <div id="Container">
 	<div class="contents">
-		<div class="titleArea" style="margin-top:100px; margin-bottom: 30px; ">
+		<div class="titleArea" style="margin-bottom: 30px; ">
 			<h3>CHARGE</h3>
 		</div>
 		<p id="money">보유중인 금액 : <%=sNowMoney %></p>

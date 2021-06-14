@@ -114,7 +114,7 @@
 		</div>
 		<div id="deleteListArea">
 			<strong>선택상품을</strong>
-			<a class="deleteList"><button onclick="DeleteOrderProd()">X 삭제하기</button></a>
+			<a class="deleteList"><button type="button" onclick="DeleteOrderProd()">X 삭제하기</button></a>
 		</div>
 		<div class="orderArea">
 			<div class="title"><h3>주문 정보</h3></div>

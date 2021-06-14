@@ -78,12 +78,12 @@
 							<input type="checkbox" name="prod" onclick="checkSelectAll()" value=<%=value%>>
 						</td>
 						<td>
-							<a href="description.show?pNum=<%=cartItem.getpNum()%>">
+							<a href="description.show?pNum=<%=cartItem.getpNum() %>">
 								<img src=<%=cartItem.getUrl() %> class="thumb" style="height:80px;">
 							</a>
 						</td>
 						<td>
-							<a href="description.show?pNum=<%=cartItem.getpNum()%>">
+							<a href="description.show?pNum=<%=cartItem.getpNum() %>">
 								<strong><%=cartItem.getName() %></strong>
 							</a><br>
 							옵션 : <%=cartItem.getsOptions() %>

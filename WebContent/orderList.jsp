@@ -29,7 +29,7 @@
 <!--Wrapper-->
 <div id="Wrapper">
 <!--header-->
-<%@ include file="Header_guest.jsp"%>
+<%@ include file="Header_user.jsp"%>
 <!--/header-->
 <!--main-->
 <div id="Container" style="min-height: 800px;">
@@ -62,10 +62,12 @@
 						주문시간 : <%=osheet.getOrderTime() %>
 					</td>
 					<td>
-						<a href="description.show?pNum=<%=item.getName() %>"><img alt="" src=<%=item.getUrl() %> style="height:80px;"></a>
+						<a href="description.show?pNum=<%=item.getpNum() %>"><img alt="" src=<%=item.getUrl() %> style="height:80px;"></a>
 					</td>
 					<td>
-						<%=item.getName() %><br>
+						<a href="description.show?pNum=<%=item.getpNum() %>">
+							<%=item.getName() %>
+						</a><br>
 						옵션 : <%=item.getsOptions() %>
 					</td>
 					<td><%=osheet.getQuantity() %></td>
@@ -82,10 +84,10 @@
 		</div>
 	</div>
 <!--/main-->
+</div>
 <!--footer-->
 <%@ include file="Footer.jsp"%>
 <!--/footer-->
-</div>
 <!--/Wrapper-->
 </div>
 </body>

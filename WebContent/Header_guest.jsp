@@ -1,5 +1,14 @@
 <%@ page language="java" contentType="text/html; charset=UTF-8"
     pageEncoding="UTF-8"%>
+<style>
+.user a {
+	font-size: 22px;
+}
+
+#nav a {
+	font-size: 22px;
+}
+</style>
 <div id="Header" class="Header">
 	<div class="Header_inner">
 		<div class="catego">
@@ -8,13 +17,13 @@
 			</ul>
 		</div>
 		<nav id="nav">
-		<ul>
-			<li><a href="">BEST</a></li>
-			<li><a href="">OUTER</a></li>
-			<li><a href="">TOP</a></li>
-			<li><a href="">PANTS</a></li>
-			<li><a href="">ACC</a></li>
-		</ul>
+			<ul>
+				<li><a href="">BEST</a></li>
+				<li><a href="">OUTER</a></li>
+				<li><a href="">TOP</a></li>
+				<li><a href="">PANTS</a></li>
+				<li><a href="">ACC</a></li>
+			</ul>
 		</nav>
 		<div class="user">
 			<ul>

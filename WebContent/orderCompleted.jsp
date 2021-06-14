@@ -59,7 +59,7 @@
 					%>
 					<tr>
 						<td>
-							주문번호 : [<%=osheet.getoNum() %>]<br>
+							주문번호 : <a href="odetail.show?oNum=<%=osheet.getoNum()%>">[<%=osheet.getoNum() %>]</a><br>
 							주문시간 : <%=osheet.getOrderTime() %>
 						</td>
 						<td>

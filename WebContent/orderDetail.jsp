@@ -31,7 +31,7 @@
 <!--Wrapper-->
 <div id="Wrapper">
 <!--header-->
-<%@ include file="Header_guest.jsp"%>
+<%@ include file="Header_user.jsp"%>
 <!--/header-->
 <!--main-->
 <div id="Container">
@@ -80,12 +80,12 @@
 				<tbody>
 					<tr>
 						<td>
-							<a href="description.show?pNum=<%=item.getName() %>">
+							<a href="description.show?pNum=<%=item.getpNum() %>">
 								<img src="<%=item.getUrl() %>" alt="주문상품" style="height:80px;">
 							</a>
 						</td>
 						<td>
-							<a href="description.show?pNum=<%=item.getName() %>">
+							<a href="description.show?pNum=<%=item.getpNum() %>">
 								<strong class="name"><%=item.getName() %></strong>
 							</a>
 							<div class="option">[옵션: <%=item.getsOptions() %>]</div>
