@@ -2,7 +2,7 @@
 MVC2 model 과 css, js 를 응용한 쇼핑몰 웹사이트 프로젝트
 
 ## 3가지의 주요 컨트롤러
-  ### FrontContoller : 사용자정보와 관련된 것들(\*.do)을 담당하는 중앙 컨트롤러
+  ### FrontContoller : 사용자 정보와 관련된 것들(\*.do)을 담당하는 중앙 컨트롤러
   * SignUpController
   * LoginController
   * ChargeController
