@@ -15,10 +15,6 @@ import com.dev.vo.UserVO;
 public class ShowCartAllOrderController implements Controller {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
-		UserVO user = (UserVO)session.getAttribute("user");
-		session.setAttribute("user", user);
-		
 		String orderer = (String)req.getSession().getAttribute("id");
 		ArrayList<ItemVO> itemList = ItemService.getInstance().showCartAll(orderer);
 		

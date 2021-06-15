@@ -507,7 +507,13 @@ public class ItemDAO {
 			System.out.println("getODetail: " + e);
 		} finally {
 			if(rs != null) close(rs, pstmt, con);
-			else close(pstmt, con);
+			else if(pstmt != null) close(pstmt, con);
+			else
+				try {
+					con.close();
+				} catch (SQLException e) {
+					System.out.println("getODetail: " + e);
+				}
 		}
 		return oDetail;
 	}

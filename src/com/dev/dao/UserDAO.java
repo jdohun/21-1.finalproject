@@ -99,6 +99,7 @@ public class UserDAO {
 			if(rs.next()) {
 				user = new UserVO();
 				user.setId(rs.getString("Id"));
+				user.setPwd(rs.getString("Pwd"));
 				user.setName(rs.getString("Name"));
 				user.setPhone(rs.getString("Phone"));
 				user.setAddr(rs.getString("Addr"));
@@ -128,6 +129,7 @@ public class UserDAO {
 		Connection con = connect();
 		String sql = "update user set money = money+? where id=?";
 		PreparedStatement pstmt = null;
+		ResultSet rs = null;
 		int result = 0;
 		try {
 			pstmt = con.prepareStatement(sql);
@@ -135,7 +137,13 @@ public class UserDAO {
 			pstmt.setString(2, user.getId());
 			result = pstmt.executeUpdate();
 			if(result == 1) {
-				user.setMoney(user.getMoney() + Integer.parseInt(charge));
+				sql = "select * from user where id = ?";
+				pstmt = con.prepareStatement(sql);
+				pstmt.setString(1, user.getId());
+				rs = pstmt.executeQuery();
+				if(rs.next()) {
+					user.setMoney(rs.getInt("money"));
+				}
 			}
 		} catch (SQLException e) {
 			System.out.println("UserDAO-charge: " + e);

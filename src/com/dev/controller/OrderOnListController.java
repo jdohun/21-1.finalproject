@@ -15,10 +15,6 @@ import com.dev.vo.UserVO;
 public class OrderOnListController implements Controller {
 	@Override
 	public void execute(HttpServletRequest req, HttpServletResponse resp) throws ServletException, IOException {
-		HttpSession session = req.getSession();
-		UserVO user = (UserVO)session.getAttribute("user");
-		session.setAttribute("user", user);
-		
 		String job = req.getParameter("job");
 		
 		String id = (String)req.getSession().getAttribute("id");
