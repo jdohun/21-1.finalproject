@@ -45,3 +45,7 @@ WebContent - css - \*.css files <br>
 WebContent - images - \*.jpg or \*.png <br>
 WebContent - js - \*.js <br>
 WebContent - \*.jsp <br>
+
+****
+  ## 전체적으로 아쉬웠던 점
+  * 장바구니 시스템을 구현하는데 쓸데없는 시간을 너무 낭비해서 나머지 css나 다른 자잘한 기능들을 만들지 못했고,<br> 급하게 마무리 하느라 비슷한 함수가 여러개 생성되면서 코드가 길어진 점이 아쉽습니다.
