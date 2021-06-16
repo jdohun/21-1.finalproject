@@ -6,7 +6,7 @@
 	margin-top: 140px;
 }
 
-.mypages {
+.box {
 	display:inline-block;
 	padding: 20px;
 	width :300px; 
@@ -26,4 +26,28 @@
 
 .mypages:hover{
 	opacity: 0.7;
+}
+
+#boxZone {
+	width: 100%;
+	margin: 40px auto 0;
+	text-align: center;
+}
+
+#boxZone > li {
+	display:inline-block;
+	vertical-align: bottom;
+	margin: 10px;
+}
+
+.box {
+	display:inline-block;
+	padding: 20px;
+	width :300px; 
+	height: 100px;
+	border: 1px solid #999;
+}
+
+.box > a {
+	display: inline-block;
 }

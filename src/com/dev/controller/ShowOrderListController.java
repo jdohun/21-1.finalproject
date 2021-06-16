@@ -24,10 +24,15 @@ public class ShowOrderListController implements Controller {
 	
 		ItemService service = ItemService.getInstance();
 		ArrayList<OSheetVO> osList = service.getOrderList(orderer);
-		ArrayList<ItemVO> itemList = service.getCompletedProd(osList);
-		
-		req.setAttribute("osList", osList);
-		req.setAttribute("itemList", itemList);
+		if(osList.isEmpty()) {
+			String msg = "주문 내역이 없습니다";
+			req.setAttribute("msg", msg);
+		}
+		else {
+			ArrayList<ItemVO> itemList = service.getCompletedProd(osList);
+			req.setAttribute("osList", osList);
+			req.setAttribute("itemList", itemList);
+		}
 		
 		String path = "orderList.jsp";
 		HttpUtil.forward(req, resp, path);

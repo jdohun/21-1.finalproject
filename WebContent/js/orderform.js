@@ -62,12 +62,14 @@ let SameInfor = function(radioSame){
 };
 
 let checkMoney = function(){
+	let form = document.getElementById("orderForm");
 	let con_res = confirm("금액이 부족합니다. 충전페이지로 이동하시겠습니까?");
-	if(con_res == true){
-		window.location.href = 'charge.jsp';
+	if(con_res){
+		return location.replace('charge.jsp');
 	}
 	else{
-		return alert("결제가 진행되지 않습니다");
+		alert("결제가 진행되지 않습니다");
+		return form.action="#";
 	}
 }
 

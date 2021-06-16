@@ -22,6 +22,7 @@
 		response.sendRedirect("login.jsp");
 	}
 	DecimalFormat commas = new DecimalFormat("###,###");
+	String msg = (String)request.getAttribute("msg");
 	ArrayList<ItemVO> itemList = (ArrayList<ItemVO>)request.getAttribute("itemList");
 	ArrayList<OSheetVO> osList = (ArrayList<OSheetVO>)request.getAttribute("osList");
 %>
@@ -52,6 +53,17 @@
 			</thead>
 			<tbody>
 				<%
+					if(msg != null){
+				%>
+					<tr>
+						<td colspan="6" style="text-align:center;">
+							<%=msg %>
+						</td>
+					</tr>
+				<%
+					}else{
+				%>
+				<%
 					for(int i = 0; i< osList.size(); ++i){
 						OSheetVO osheet = osList.get(i);
 						ItemVO item = itemList.get(i);
@@ -78,7 +90,10 @@
 					<td><%=osheet.getRemark() %></td>
 					<%} %>
 				</tr>
-				<%}%>
+				<%
+					}
+				}
+				%>
 			</tbody>
 		</table>
 		</div>
